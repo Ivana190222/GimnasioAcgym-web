@@ -26,7 +26,8 @@
                 <a href="#equipo" onclick="seleccionar()">Equipo</a>
                 <a href="#contacto" onclick="seleccionar()">Contacto</a>
                 <a href="#reservas"onclick="seleccionar()">Reserva</a>
-                <a href="#" id="login-link">Login</a>
+                <a class="auth-links" href="#" id="login-link">Login</a>
+                <a class="auth-links" href="#" id="logout-link" style="display: none;" onclick="handleLogout()">Cerrar Sesión</a>
             </nav>
             <div class="redes">
                 <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
@@ -41,7 +42,7 @@
             </div>                
         </header>
     </div>
-
+    
     <!-- SECCION INICIO -->
     <section id="inicio" class="inicio">
         <div class="contenido-seccion">
@@ -295,11 +296,6 @@
                     <div class="info">
                         <h2>JOAQUIN</h2>
                         <p>Funcional</p>
-
-                    <img src="img/pilates.png" alt="">
-                    <div class="info">
-                        <h2>JULIETA</h2>
-                        <p>Pilates Mat</p>
                         <a href="#">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
@@ -310,7 +306,6 @@
                 </div>
                 <div class="col">
                     <img src="img/e2.png" alt="">
-                    <img src="img/verofit2.png" alt="">
                     <div class="info">
                         <h2>VERONICA</h2>
                         <p>Funcional - Gap - Tabatas</p>
@@ -326,10 +321,7 @@
                     <img src="img/e3.png" alt="">
                     <div class="info">
                         <h2>VICTOR</h2>
-                    <img src="img/aerobox2.png" alt="">
-                    <div class="info">
-                        <h2>BRENDA</h2>
-                        <p>Aerobox</p>
+                    <p>Aerobox</p>
                         <a href="#">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
@@ -356,7 +348,7 @@
             </div>
             <div class="fila">
                 <div class="col">
-                    <form action="https://formsubmit.co/ivanareyna83@email.com" method="POST" />
+                    <form action="https://formsubmit.co/ivanareyna83@email.com" method="POST" >
                     <label for="Nombre">Nombre</label>
                     <input type="text" name="name" placeholder="Ingrese Nombre">
                 </div>
@@ -388,93 +380,101 @@
         </div>
     </section>
     <!-- SECCION RESERVAS -->
-    <section id="reservas">
-        <h2>Reservas</h2>
-        <div class="schedule">
-            <!-- Aquí puedes generar dinámicamente los horarios de las sesiones -->
-            <div class="session">
-                <h3> Lunes a viernes 08:00hs</h3>
-                <p>AEROBICA VERO</p>
-                <p>12 Disponibles</p>
-                <button class="session-button">RESERVÁ</button>
-            </div>
-            <div class="session">
-                <h3> Lunes a viernes 14:00hs</h3>
-                <p>AEROBICA VERO</p>
-                <p>12 Disponibles</p>
-                <button class="session-button">RESERVÁ</button>
-            </div>
-            <div class="session">
-                <h3> Lunes a viernes 19:00hs</h3>
-                <p>AEROBICA VERO</p>
-                <p>12 Disponibles</p>
-                <button class="session-button">RESERVÁ</button>
-            </div>
-            <div class="session">
-                <h3> Lunes, Mierc, viernes 15:00hs</h3>
-                <p>AEROBOX BRENDA</p>
-                <p>12 Disponibles</p>
-                <button class="session-button">RESERVÁ</button>
-            </div>
-            <div class="session">
-                <h3> Martes y Jueves 19:00hs</h3>
-                <p>AEROBOX BRENDA</p>
-                <p>12 Disponibles</p>
-                <button class="session-button">RESERVÁ</button>
-            </div>
-            <div class="session">
-                <h3> Martes y Jueves 19:00hs</h3>
-                <p>AEROBOX BRENDA</p>
-                <p>12 Disponibles</p>
-                <button class="session-button">RESERVÁ</button>
-            </div>
-            <div class="session">
-                <h3> Martes y Jueves 19:00hs</h3>
-                <p>FUNCIONAL JOAQUIN</p>
-                <p>12 Disponibles</p>
-                <button class="session-button">RESERVÁ</button>
-            </div>
-            <div class="session">
-                <h3> Lunes y viernes 20:00hs</h3>
-                <p>BOXEO RECREATIVO VICTOR</p>
-                <p>12 Disponibles</p>
-                <button class="session-button">RESERVÁ</button>
-            </div>
-            
+<section id="reservas">
+    <h2>Reservas</h2>
+    <div class="schedule">
+        <div class="session">
+            <h3> Lunes a viernes 08:00hs</h3>
+            <p>AEROBICA VERO</p>
+            <p>12 Disponibles</p>
+            <button class="session-button" onclick="addToCart('Lunes a viernes 08:00hs')">RESERVAR</button>
         </div>
-    </section>
-    <!-- Modal -->
-    <div id="reservaModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Inicia Sesión</h2>
-            <form id="login-form" action="http://localhost:3000/login" method="post">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-                <br>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-                <br>
-                <button type="submit">INGRESÁ</button>
-            </form>
-            <p>¿No tienes una cuenta? <a href="#" id="register-link">Regístrate aquí</a></p>
-            <div id="register-form" style="display:none;"></div>
-                
-                <form id="register-form" action="http://localhost:3000/register" method="post">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                    <br>
-                    <label for="correo">Correo:</label>
-                    <input type="email" id="correo" name="correo" required>
-                    <br>
-                    <label for="contrasena">Contraseña:</label>
-                    <input type="password" id="contrasena" name="contrasena" required>
-                    <br>
-                    <button type="submit">Registrarse</button>
-                </form>
-            </div>
+        <div class="session">
+            <h3> Lunes a viernes 14:00hs</h3>
+            <p>AEROBICA VERO</p>
+            <p>12 Disponibles</p>
+            <button class="session-button" onclick="addToCart('Lunes a viernes 14:00hs')">RESERVAR</button>
         </div>
-    </div>
+        <div class="session">
+            <h3> Lunes a viernes 19:00hs</h3>
+            <p>AEROBICA VERO</p>
+            <p>12 Disponibles</p>
+            <button class="session-button" onclick="addToCart('Lunes a viernes 19:00hs')">RESERVAR</button>
+        </div>
+        <div class="session">
+            <h3> Lunes, Mierc y viernes 15hs</h3>
+            <p>AEROBOX BRENDA</p>
+            <p>12 Disponibles</p>
+            <button class="session-button" onclick="addToCart('Lunes, Mierc y viernes 15hs')">RESERVAR</button>
+        </div>
+        <div class="session">
+            <h3> Martes y jueves 19hs</h3>
+            <p>AEROBOX BRENDA</p>
+            <p>12 Disponibles</p>
+            <button class="session-button" onclick="addToCart('Martes y jueves 19hs')">RESERVAR</button>
+        </div>
+        <div class="session">
+            <h3>Lunes, Mierc y viernes 18hs</h3>
+            <p>FUNCIONAL MASCULINO JOAQUIN</p>
+            <p>12 Disponibles</p>
+            <button class="session-button" onclick="addToCart('Lunes, Mierc y viernes 18hs')">RESERVAR</button>
+        </div>
+        <div class="session">
+            <h3> Martes y Jueves 19hs</h3>
+            <p>FUNCIONAL MASCULINO JOAQUIN</p>
+            <p>12 Disponibles</p>
+            <button class="session-button" onclick="addToCart('Martes y Jueves 19hs')">RESERVAR</button>
+        </div>
+        <div class="session">
+            <h3>Lunes y Miercoles 20hs</h3>
+            <p>BOXEO RECREATIVO VICTOR</p>
+            <p>12 Disponibles</p>
+            <button class="session-button" onclick="addToCart('Lunes y Miercoles 20hs')">RESERVAR</button>
+        </div>
+        </div>
+       <br> 
+       <h2>Tu Reserva</h2>
+<div id="cart">
+    <ul id="cart-items"></ul>
+</div>
+<button id="confirm-reservation" onclick="confirmReservation()">Confirmar Reserva</button>
+
+</section>
+    
+    <!-- Modal para Login y Registro --> 
+     <div id="reservaModal" class="modal"> 
+        <div class="modal-content"> 
+            <span class="close" onclick="closeModal()">&times;</span> 
+            <h2>Inicia Sesión</h2> 
+            <form id="login-form" onsubmit="return handleLogin(event)"> 
+                <label for="email">Email</label> 
+                <input type="email" id="email" name="correo" required><br> 
+                <label for="password">Password</label> 
+                <input type="password" id="password" name="contrasena" required><br> 
+                <button type="submit">INGRESÁ</button> 
+            </form> 
+            <p>¿No tienes una cuenta? <a href="#" id="register-link" onclick="showRegisterForm()">Regístrate aquí</a></p> 
+            <div id="register-form-container" style="display:none;"> 
+                <form onsubmit="return handleRegister(event)"> 
+                    <label for="nombre">Nombre:</label> 
+                    <input type="text" id="nombre" name="nombre" required><br> 
+                    <label for="correo">Correo:</label> 
+                    <input type="email" id="correo" name="correo" required><br> 
+                    <label for="contrasena">Contraseña:</label> 
+                    <input type="password" id="contrasena" name="contrasena" required><br> 
+                    <button type="submit">Registrarse</button> 
+                </form> 
+            </div> 
+        </div> 
+    </div> 
+    <div id="success-message" class="modal" style="display: none;"> 
+        <div class="modal-content"> 
+            <span class="close" onclick="closeSuccessMessage()">&times;</span> 
+            <h2>Cuenta Generada</h2> 
+            <button onclick="closeSuccessMessage()">OK</button> 
+        </div> 
+    </div> 
+      
     <footer>
         <div class="info">
             <p>2024 - <span class="txtVerde">ACGYM</span> Todos los derechos reservados</p>
@@ -494,10 +494,12 @@
             </div>
         </div>
     </footer>
-
- <!-- Enlace a los archivos JS -->
+    
+    <!-- Enlace a los archivos JS -->
  <script src="scripts/app.js"></script>
- <script src="scripts/modal.js"></script>   
+ <script defer src="scripts/modal.js"></script>
+ 
+ 
 
 </body>
 </html>

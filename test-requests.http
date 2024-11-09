@@ -1,0 +1,10 @@
+### Prueba de inicio de sesión
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "correo": "ivanareyna83@gmail.com",
+    "contrasena": "caca"
+}
+
+

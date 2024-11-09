@@ -60,6 +60,29 @@ body{
 .txtVerde{
     color: #02662c;
 }
+nav {
+    display: flex;
+    justify-content: flex-start; /* Alinear elementos a la izquierda */
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); ;
+    padding: 0 16px;
+}
+
+nav a {
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #111;
+}
+
+.auth-links {
+    margin-left: auto; /* Mover "Login" y "Cerrar Sesión" a la derecha */
+}
+
 .nav-responsive{
     display: none;
     font-size: 25px;
@@ -463,7 +486,7 @@ body{
     margin: 50px 0;
     display: flex;
     justify-content: space-around;
-<<<<<<< HEAD
+
     
 }
 .equipo .fila .col{
@@ -473,7 +496,7 @@ body{
 .equipo .fila .col img{
     
    max-height: 400px;
-=======
+
     flex-wrap: wrap;
 }
 .equipo .fila .col{
@@ -485,7 +508,6 @@ body{
 .equipo .fila .col img{
     width: 200%;
    height: 600px;
->>>>>>> 7ac1d041f7ea48173dafd430d591d99d7a1ef316
    display: block;
    margin: auto;
 }
@@ -596,31 +618,22 @@ body{
     display: inline-block;
     margin-right: 10px;
 }
-<<<<<<< HEAD
-/* Estilo de la sección de reservas */
-.schedule {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px; /* Añade un espacio uniforme entre las sesiones */
-}
 
-.session {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: left;
-    color: #000;
-    flex: 1 1 300px; /* Hace que los divs sean responsivos */
-    box-sizing: border-box; /* Asegura que padding y border se incluyan en el ancho y alto */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: auto; /* Asegura que todos los divs tengan la misma altura */
-    min-height: 250px; /* Ajusta este valor según sea necesario */
-}
+/* Estilo de la sección de reservas */
+
+  .schedule {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .session {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+
+
 
 .session h3 {
     font-size: 1.5rem;
@@ -645,74 +658,199 @@ body{
 .session button:hover {
     background-color: #024d1a;
 }
-/* Estilo para la modal */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la pantalla */
+    z-index: 1000; /* Por encima de otros elementos */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-.modal-content {
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Desplazamiento si es necesario */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  }
+  
+  .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 10% auto; /* Centrado vertical y horizontal */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-}
-
-.close {
+    width: 80%; /* Ancho */
+    max-width: 600px; /* Ancho máximo */
+  }
+  
+  .close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
+  }
+  
+  .close:hover,
+  .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
-}
-
-/* Estilo del formulario */
-.modal-content form {
-    display: flex;
-    flex-direction: column;
-}
-
-.modal-content label {
-    margin-bottom: 10px;
-}
-
-.modal-content input[type="email"],
-.modal-content input[type="password"] {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.modal-content button {
-    background-color: #02662c;
+  }
+  
+  button {
+    background-color: #4CAF50; /* Verde */
     color: white;
-    padding: 10px;
+    padding: 14px 20px;
+    margin: 8px 0;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
+    width: 100%;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  input[type=email],
+  input[type=password],
+  input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  #add-to-cart-btn {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    padding: 10px 20px; /* Ajusta según sea necesario */
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px; /* Ajusta según sea necesario */
+    width: auto; /* Ancho automático */
+    height: auto; /* Altura automática */
+  }
+  
+  #add-to-cart-btn:hover {
+    opacity: 0.8;
+  }
+  
+  #success-message {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  #success-message .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+  }
+  
+  #success-message .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  #success-message .close:hover,
+  #success-message .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* Estilo para la modal */
+  #reservas {
+    background-color: #f5f5f5; /* Fondo claro */
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  #reservas h2 {
+    color: #333; /* Color oscuro para el título */
+    text-align: center;
+  }
+  
+  #cart {
+    background-color: #fff; /* Fondo blanco */
+    padding: 20px;
+    border: 2px solid #333; /* Borde oscuro */
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 400px; /* Ajusta el ancho según tus necesidades */
+    margin: 0 auto; /* Centra el div horizontalmente */ 
+    text-align: center; /* Centra el contenido del div */
+  }
+  
+  #cart-items {
+    list-style-type: none; /* Sin viñetas */
+    padding: 0;
+  }
+  
+  #cart-items li {
+    background-color: #eee; /* Fondo claro para los elementos */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  #cart-items li span {
+    font-weight: bold;
+  }
+  
+  #cart h3 {
+    text-align: center;
+  }
+  
+  #cart button {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  #cart button:hover {
+    background-color: #45a049; /* Verde más oscuro al pasar el ratón */
+  }
+  #confirm-reservation {
+    background-color: #4CAF50; /* Verde */ 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 16px; 
+    margin-top: 10px; 
+    border-radius: 5px; 
+    width: 150px; /* Ajusta el ancho del botón */ 
+    display: block; 
+    margin: 20px auto; /* Centra el botón horizontalmente */
 }
 
-.modal-content button:hover {
-    background-color: #024d1a;
+#confirm-reservation:hover {
+    background-color: #45a049; /* Verde más oscuro al pasar el ratón */
 }
-=======
->>>>>>> 7ac1d041f7ea48173dafd430d591d99d7a1ef316
+
+
+
+
+  
 
 /* *********** */
 /* FOOTER */
@@ -805,28 +943,24 @@ footer .info .redes a:hover{
     }
 
     .equipo .fila{
-<<<<<<< HEAD
+
         display: block;
-=======
+
         flex: column;
         align-items: center;
->>>>>>> 7ac1d041f7ea48173dafd430d591d99d7a1ef316
+
     }
     .equipo .fila .col{
         max-width: 100%;
         margin-bottom: 20px;
     }
-<<<<<<< HEAD
+
     .equipo .fila .col img{
         max-height: 200px;
     }
     .equipo .fila .info{
         max-width: 250px;
         margin: auto;
-=======
-    
-    
->>>>>>> 7ac1d041f7ea48173dafd430d591d99d7a1ef316
     }
     .contacto .fila{
         display: block;
