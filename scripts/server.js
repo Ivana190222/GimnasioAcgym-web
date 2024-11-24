@@ -71,22 +71,29 @@ passport.deserializeUser((user, done) => {
 
 // Rutas de autenticación
 app.post('/login', (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
+    const { correo, contrasena } = req.body;
+
+    const query = `SELECT * FROM Usuarios WHERE Correo = ?`;
+    db.query(query, [correo], (err, results) => {
         if (err) {
-            return res.status(500).json({ success: false, message: 'Internal server error' });
+            console.error('Error en la consulta a la base de datos:', err);
+            return res.status(500).json({ success: false, message: 'Error en el servidor' });
         }
-        if (!user) {
+        if (results.length === 0 || results[0].Contrasena !== contrasena) {
             return res.status(401).json({ success: false, message: 'Credenciales incorrectas' });
         }
+
+        const user = results[0]; // Definir la variable 'user' aquí
         req.logIn(user, (err) => {
             if (err) {
-                return res.status(500).json({ success: false, message: 'Could not log in user' });
+                console.error('Error en el inicio de sesión:', err);
+                return res.status(500).json({ success: false, message: 'No se pudo iniciar sesión' });
             }
-            // Asegurarse de que el ID del usuario se almacena en el almacenamiento local
-            res.json({ success: true, userID: user.id, nombreCompleto: user.nombre });
+            res.json({ success: true, userID: user.ID, nombreCompleto: user.Nombre, esAdmin: user.esAdmin });
         });
-    })(req, res, next);
+    });
 });
+
 
 
 app.get('/logout', (req, res) => { 

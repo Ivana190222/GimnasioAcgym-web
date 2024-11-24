@@ -74,32 +74,33 @@ function handleLogin(event) {
         body: JSON.stringify({ correo, contrasena })
     })
     .then(response => {
-        const contentType = response.headers.get('content-type');
-        console.log('Response Content-Type:', contentType); // Depuración
-        if (!contentType || !contentType.includes('application/json')) {
-            return Promise.reject(new Error('Invalid Content-Type. Expected application/json'));
+        if (!response.ok) {
+            throw new Error('Error en la respuesta del servidor');
         }
         return response.json();
     })
     .then(data => {
-        console.log('Response data:', data); // Depuración
         if (data.success) {
             isLoggedIn = true;
-            localStorage.setItem('currentUserID', data.userID); // Guardar el ID del usuario en el almacenamiento local
-            console.log('ID del usuario almacenado:', data.userID); // Verificación en consola
-            document.getElementById('login-link').textContent = `Hola, ${data.nombreCompleto}`; // Mostrar solo el nombre
-            document.getElementById('logout-link').style.display = 'block';
-            document.getElementById('login-form').style.display = 'none'; // Ocultar el formulario de inicio de sesión
-            closeModal();
+            localStorage.setItem('currentUserID', data.userID);
+            if (data.esAdmin) {
+                window.open('http://localhost:3000/admin', '_blank'); // Abrir en una nueva ventana
+            } else {
+                document.getElementById('login-link').textContent = `Hola, ${data.nombreCompleto}`;
+                document.getElementById('logout-link').style.display = 'block';
+                document.getElementById('login-form').style.display = 'none';
+                closeModal();
+            }
         } else {
             alert(data.message || 'Credenciales incorrectas');
         }
     })
     .catch(error => {
-        console.error('Error:', error); // Depuración
+        console.error('Error:', error);
         alert('Hubo un error al procesar la solicitud.');
     });
 }
+
 
 // Función para manejar el cierre de sesión
 function handleLogout() {
