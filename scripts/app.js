@@ -76,38 +76,48 @@ function updateCart() {
         cartList.appendChild(confirmButton);
     }
 }
+function getCurrentUserId() { 
+    const userID = localStorage.getItem('currentUserID'); 
+    console.log('ID del usuario recuperado:', userID); // Verificación en consola 
+    return userID; 
+}
 
-/*function confirmReservation() {
-    if (cartItems.length === 0) {
-        alert('No tienes reservas en el carrito.');
-        return;
-    }
-    // Aquí puedes añadir lógica para confirmar la reserva, por ejemplo, enviarla a un servidor
-    alert('Reserva confirmada:\n' + cartItems.join('\n'));
-    // Vaciar el carrito después de confirmar la reserva
-    cartItems.length = 0;
-    updateCart();
-}*/
 function confirmReservation() {
     if (cartItems.length === 0) {
         alert('No tienes reservas en el carrito.');
         return;
     }
 
-    const usuarioID = getCurrentUserId(); // Asegúrate de obtener el ID del usuario del sistema de autenticación
-    const fechaHora = new Date().toISOString().slice(0, 19).replace('T', ' '); // Formato para DATETIME en MySQL
+    const usuarioID = getCurrentUserId();
+    if (!usuarioID) {
+        alert('No se encontró el ID del usuario. Asegúrate de estar logueado.');
+        return;
+    }
+
+    const fechaHora = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     cartItems.forEach(item => {
-        const entrenadorID = getEntrenadorIdFromSessionDetail(item); // Implementa esta función para obtener el ID del entrenador
+        const entrenadorID = getEntrenadorIdFromSessionDetail(item);
+        if (!entrenadorID) {
+            alert('No se encontró el ID del entrenador para la sesión: ' + item);
+            return;
+        }
 
-        fetch('/confirm_reservation', {
+        const bodyData = JSON.stringify({ usuarioID, entrenadorID, fechaHora });
+
+        fetch('http://localhost:3000/confirm_reservation', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ usuarioID, entrenadorID, fechaHora })
+            body: bodyData
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor');
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.success) {
                 console.log('Reserva guardada:', data.message);
@@ -116,21 +126,24 @@ function confirmReservation() {
             }
         })
         .catch(error => {
-            console.error('Error en la solicitud:', error); // Manejo de errores
+            console.error('Error en la solicitud:', error);
         });
     });
 
     alert('Reserva confirmada:\n' + cartItems.join('\n'));
-    // Vaciar el carrito después de confirmar la reserva
     cartItems.length = 0;
     updateCart();
 }
 
 // Obtener el ID del usuario actual (implementar según tu lógica de autenticación)
 function getCurrentUserId() {
-    // Supongamos que lo guardas en el almacenamiento local al iniciar sesión
-    return localStorage.getItem('currentUserID');
+    const userID = localStorage.getItem('currentUserID');
+    console.log('ID del usuario recuperado:', userID); // Verificación en consola
+    return userID;
 }
+
+
+
 
 // Obtener el ID del entrenador desde el detalle de la sesión (implementa tu lógica)
 function getEntrenadorIdFromSessionDetail(sessionDetail) {
@@ -149,5 +162,3 @@ function getEntrenadorIdFromSessionDetail(sessionDetail) {
             return null; // En caso de error
     }
 }
-
-

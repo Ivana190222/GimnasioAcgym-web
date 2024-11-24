@@ -983,3 +983,39 @@ footer .info .redes a:hover{
         margin-bottom: 10px;
     }
 }
+/* estilo.css */
+
+/* Estilos para la tabla de reservas */
+#reservas-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#reservas-table th, #reservas-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#reservas-table th {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+}
+
+#reservas-table td {
+    text-align: center;
+}
+
+/* Estilos para los botones de acción */
+button {
+    margin: 4px;
+    padding: 6px 12px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005f5f;
+}

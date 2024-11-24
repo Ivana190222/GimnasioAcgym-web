@@ -59,7 +59,8 @@ function showRegisterForm() {
     document.getElementById('login-form').style.display = 'none';
     document.getElementById('register-form-container').style.display = 'block';
 }
-//funcion para manejar el inicio de sesion
+
+// Función para manejar el inicio de sesión
 function handleLogin(event) {
     event.preventDefault();
     const correo = document.getElementById('email').value;
@@ -84,6 +85,8 @@ function handleLogin(event) {
         console.log('Response data:', data); // Depuración
         if (data.success) {
             isLoggedIn = true;
+            localStorage.setItem('currentUserID', data.userID); // Guardar el ID del usuario en el almacenamiento local
+            console.log('ID del usuario almacenado:', data.userID); // Verificación en consola
             document.getElementById('login-link').textContent = `Hola, ${data.nombreCompleto}`; // Mostrar solo el nombre
             document.getElementById('logout-link').style.display = 'block';
             document.getElementById('login-form').style.display = 'none'; // Ocultar el formulario de inicio de sesión
@@ -98,30 +101,26 @@ function handleLogin(event) {
     });
 }
 
-
-
-// Función para manejar el cierre de sesión 
-function handleLogout() { 
-    fetch('http://localhost:3000/logout') 
-    .then(() => { 
-        isLoggedIn = false; 
-        document.getElementById('login-link').textContent = 'Iniciar Sesión'; 
-        document.getElementById('logout-link').style.display = 'none'; 
-        document.getElementById('login-form').style.display = 'block'; // Mostrar el formulario de inicio de sesión 
-        }) 
-        .catch(error => { 
-            console.error('Error:', error); // Depuración 
-            alert('Hubo un error al cerrar sesión.'); 
-        });
+// Función para manejar el cierre de sesión
+function handleLogout() {
+    fetch('http://localhost:3000/logout')
+    .then(() => {
+        isLoggedIn = false;
+        localStorage.removeItem('currentUserID'); // Eliminar el ID del usuario del almacenamiento local
+        document.getElementById('login-link').textContent = 'Iniciar Sesión';
+        document.getElementById('logout-link').style.display = 'none';
+        document.getElementById('login-form').style.display = 'block'; // Mostrar el formulario de inicio de sesión
+    })
+    .catch(error => {
+        console.error('Error:', error); // Depuración
+        alert('Hubo un error al cerrar sesión.');
+    });
 }
 
-// Función para cerrar el modal 
-function closeModal() { 
-    const modal = document.getElementById('reservaModal'); 
-    if (modal) { 
+// Función para cerrar el modal
+function closeModal() {
+    const modal = document.getElementById('reservaModal');
+    if (modal) {
         modal.style.display = 'none'; // Cierra el modal
     }
 }
-
-
-
